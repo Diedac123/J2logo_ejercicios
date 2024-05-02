@@ -28,23 +28,32 @@ def carga_keywords():
     return keywords
 
 
-while True:
-    print("Selecciona una opcion:")
-    print("[1] Importar palabras clave")
-    print("[2] Mostrar palabras clave")
-    print("[0] Salir")
-    option = input("Opcion: ")
+def muestra_keywords(keywords):
+    for i in range(0, len(keywords), 20):
+        print("\n".join(keywords[i : i + 20]))
+        input("Pulsa enter para continuar...")
 
-    if option == "1":
-        keywords = carga_keywords()
-    elif option == "2":
-        if "keywords" in locals():
-            for i in range(0, len(keywords), 20):
-                print("\n".join(keywords[i : i + 20]))
-                input("Pulsa enter para continuar...")
+
+def main():
+    while True:
+        print("Selecciona una opcion:")
+        print("[1] Importar palabras clave")
+        print("[2] Mostrar palabras clave")
+        print("[0] Salir")
+        option = input("Opcion: ")
+
+        if option == "1":
+            keywords = carga_keywords()
+        elif option == "2":
+            if "keywords" in locals():
+                muestra_keywords(keywords)
+            else:
+                print("No se han importado palabras clave")
+        elif option == "0":
+            break
         else:
-            print("No se han importado palabras clave")
-    elif option == "0":
-        break
-    else:
-        print("Opción no válida")
+            print("Opción no válida")
+
+
+if __name__ == "__main__":
+    main()
