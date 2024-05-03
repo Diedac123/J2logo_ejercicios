@@ -49,11 +49,11 @@ def comprueba_keywords(kw, dominio):
     encontrado = False
     while continuar and not encontrado:
         parametros = {"q": kw, "start": start}
-        resp = requests.get(f"https://www.google.com/search", params=parametros)
+        resp = requests.get(f"https://www.google.com/search?q={kw}&start={start}")
         if resp.status_code == 200:
             soup = BeautifulSoup(resp.text, "lxml")
             div_principal = soup.find("div", {"id": "main"})
-            resultados = div_principal.find_all("div", class_="ZINbbc xpd O9g5cc uUPGi")
+            resultados = div_principal.find_all("div", class_="tjvcx GvPZzd cHaqb")
             for res in resultados:
                 if res.div and res.div.a:
                     if aparece_el_dominio(res.div.a["href"], dominio):
@@ -78,7 +78,7 @@ def comprueba_keywords(kw, dominio):
 
 
 def main():
-    dominio = "https://developer.algorand.org/"
+    dominio = "python.org"
     while True:
         print("Selecciona una opcion:")
         print("[1] Importar palabras clave")
